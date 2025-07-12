@@ -1,5 +1,7 @@
 ﻿  main.cpp
-LINK : warning LNK4098: библиотека по умолчанию "MSVCRT" конфликтует с использованием других библиотек; используйте /NODEFAULTLIB:library
+C:\Users\n0tale\source\repos\GravSim\GravSim\main.cpp(61,54): warning C4244: аргумент: преобразование "const float" в "int", возможна потеря данных
+C:\Users\n0tale\source\repos\GravSim\GravSim\main.cpp(61,40): warning C4244: аргумент: преобразование "const float" в "int", возможна потеря данных
+C:\Users\n0tale\source\repos\GravSim\GravSim\main.cpp(74,15): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
   GravSim.vcxproj -> C:\Users\n0tale\source\repos\GravSim\x64\Debug\GravSim.exe
   'pwsh.exe' is not recognized as an internal or external command,
   operable program or batch file.
