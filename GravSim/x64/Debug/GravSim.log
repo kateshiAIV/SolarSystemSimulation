@@ -1,7 +1,17 @@
 ﻿  main.cpp
-C:\Users\n0tale\source\repos\GravSim\GravSim\main.cpp(61,54): warning C4244: аргумент: преобразование "const float" в "int", возможна потеря данных
-C:\Users\n0tale\source\repos\GravSim\GravSim\main.cpp(61,40): warning C4244: аргумент: преобразование "const float" в "int", возможна потеря данных
-C:\Users\n0tale\source\repos\GravSim\GravSim\main.cpp(74,15): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+C:\Users\n0tale\source\repos\GravSim\GravSim\main.cpp(55,24): warning C4305: *=: усечение из "double" в "_Ty"
+C:\Users\n0tale\source\repos\GravSim\GravSim\main.cpp(55,24): warning C4305:         with
+C:\Users\n0tale\source\repos\GravSim\GravSim\main.cpp(55,24): warning C4305:         [
+C:\Users\n0tale\source\repos\GravSim\GravSim\main.cpp(55,24): warning C4305:             _Ty=float
+C:\Users\n0tale\source\repos\GravSim\GravSim\main.cpp(55,24): warning C4305:         ]
+C:\Users\n0tale\source\repos\GravSim\GravSim\main.cpp(58,24): warning C4305: *=: усечение из "double" в "_Ty"
+C:\Users\n0tale\source\repos\GravSim\GravSim\main.cpp(58,24): warning C4305:         with
+C:\Users\n0tale\source\repos\GravSim\GravSim\main.cpp(58,24): warning C4305:         [
+C:\Users\n0tale\source\repos\GravSim\GravSim\main.cpp(58,24): warning C4305:             _Ty=float
+C:\Users\n0tale\source\repos\GravSim\GravSim\main.cpp(58,24): warning C4305:         ]
+C:\Users\n0tale\source\repos\GravSim\GravSim\main.cpp(80,54): warning C4244: аргумент: преобразование "const float" в "int", возможна потеря данных
+C:\Users\n0tale\source\repos\GravSim\GravSim\main.cpp(80,40): warning C4244: аргумент: преобразование "const float" в "int", возможна потеря данных
+C:\Users\n0tale\source\repos\GravSim\GravSim\main.cpp(93,15): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
   GravSim.vcxproj -> C:\Users\n0tale\source\repos\GravSim\x64\Debug\GravSim.exe
   'pwsh.exe' is not recognized as an internal or external command,
   operable program or batch file.

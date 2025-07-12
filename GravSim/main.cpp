@@ -2,6 +2,8 @@
 #include <vector>
 #include <string>
 #include <cmath>
+#include <thread>
+#include <chrono>
 #include <GLFW/glfw3.h>
 
 using namespace std;
@@ -33,7 +35,8 @@ int main(void)
 	float radius = 50.0f;
 	int res = 100;
 
-	vector<float> position = { centerX, 0.0f};
+	vector<float> position = { centerX, centerY};
+	vector<float> velocity = { 0.0f, 0.0f };
 
 
 	while (!glfwWindowShouldClose(window)) {
@@ -41,10 +44,26 @@ int main(void)
 
 		glBegin(GL_TRIANGLE_FAN);
 		DrawCircle(position[0],position[1], radius, res);
-		position[1] += 1.0f;
+
+		position[0] += velocity[0];
+		position[1] += velocity[1];
+		velocity[0] += +9.81f / 20.0f;
+		velocity[1] += +9.81f / 20.0f;
+
+
+		if (position[1]<radius || position[1] > SCREEN_HEIGHT-radius) {
+			velocity[1] *= -0.95;
+		}
+		if (position[0]<radius || position[0] > SCREEN_WIDTH-radius) {
+			velocity[0] *= -0.95;
+		}
+
+
+
 		glEnd();
 
 		glfwSwapBuffers(window);
+		this_thread::sleep_for(std::chrono::milliseconds(16));
 		glfwPollEvents();
 	}
 
