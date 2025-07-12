@@ -1,0 +1,5 @@
+﻿  main.cpp
+LINK : warning LNK4098: библиотека по умолчанию "MSVCRT" конфликтует с использованием других библиотек; используйте /NODEFAULTLIB:library
+  GravSim.vcxproj -> C:\Users\n0tale\source\repos\GravSim\x64\Debug\GravSim.exe
+  'pwsh.exe' is not recognized as an internal or external command,
+  operable program or batch file.
