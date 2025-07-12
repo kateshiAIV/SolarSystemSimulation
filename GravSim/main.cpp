@@ -5,14 +5,18 @@
 #include <thread>
 #include <chrono>
 #include <GLFW/glfw3.h>
+#include "Object.h"
+
+
 
 using namespace std;
 const string PROJECT_NAME = "GravSim";
-const float SCREEN_WIDTH = 1280.0f;
-const float SCREEN_HEIGHT = 720.0f;
-#define M_PI 3.14159265358979323846
+const float SCREEN_WIDTH = 16000.0f;
+const float SCREEN_HEIGHT = 9000.0f;
+#define M_PI 3.14159265358979323846f
+#define G 0.000000000066742f
 GLFWwindow* startGLFW();
-void DrawCircle(float centerX, float centerY, float radius, int res);
+
 
 int main(void)
 {
@@ -22,6 +26,7 @@ int main(void)
 		cerr << "Failed to create GLFW window." << endl;
 		return -1;
 	}
+	
 
 	// Setup orthographic 2D projection
 	glMatrixMode(GL_PROJECTION);
@@ -35,32 +40,45 @@ int main(void)
 	float radius = 50.0f;
 	int res = 100;
 
-	vector<float> position = { centerX, centerY};
-	vector<float> velocity = { 0.0f, 0.0f };
+	vector<Object> objects = {
+		Object(vector<float>{4000.0f, 4000.0f}, vector<float>{0.0f, 50.0f},150.0f, 7.35 * pow(10,22)),
+		Object(vector<float>{3000.0f, 3000.0f}, vector<float>{0.0f,-50.0f},150.0f, 7.35 * pow(10,22))
+
+	};
 
 
 	while (!glfwWindowShouldClose(window)) {
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glBegin(GL_TRIANGLE_FAN);
-		DrawCircle(position[0],position[1], radius, res);
-
-		position[0] += velocity[0];
-		position[1] += velocity[1];
-		velocity[0] += +9.81f / 20.0f;
-		velocity[1] += +9.81f / 20.0f;
 
 
-		if (position[1]<radius || position[1] > SCREEN_HEIGHT-radius) {
-			velocity[1] *= -0.95;
+
+		for (auto& object : objects) {
+
+
+			for (auto& otherObject : objects) {
+				if (&object == &otherObject) {continue;};
+				float dx = otherObject.position[0] - object.position[0];
+				float dy = otherObject.position[1] - object.position[1];
+				float distance = sqrt(dx * dx + dy * dy);
+				vector<float> direction = { dx / distance, dy / distance };
+				distance *= 1000;
+				float Gforce = (G * object.mass * otherObject.mass) / (distance * distance);
+				float acc1 = Gforce / object.mass;
+				vector<float> acc{ acc1 * direction[0],acc1 * direction[1] };
+				object.accelerate(acc[0], acc[1]);
+			}
+			object.updatePos();
+			object.DrawCircle();
+
+			if (object.position[1]<radius || object.position[1] > SCREEN_HEIGHT - radius) {
+				object.velocity[1] *= -0.95;
+			}
+			if (object.position[0]<radius || object.position[0] > SCREEN_WIDTH - radius) {
+				object.velocity[0] *= -0.95;
+			}
 		}
-		if (position[0]<radius || position[0] > SCREEN_WIDTH-radius) {
-			velocity[0] *= -0.95;
-		}
 
-
-
-		glEnd();
 
 		glfwSwapBuffers(window);
 		this_thread::sleep_for(std::chrono::milliseconds(16));
@@ -87,12 +105,4 @@ GLFWwindow* startGLFW() {
 	return window;
 }
 
-void DrawCircle(float centerX, float centerY, float radius, int res) {
-	glVertex2f(centerX, centerY);
-	for (int i = 0; i <= res; i++) {
-		float angle = 2.0f * M_PI * (static_cast<float>(i) / res);
-		float x = centerX + cos(angle) * radius;
-		float y = centerY + sin(angle) * radius;
-		glVertex2f(x, y);
-	}
-}
+
